@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/main.css')}}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        <a href="/index">Home</a>
+        <a herf ="/info">Info</a>
+    </div>
+    
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
