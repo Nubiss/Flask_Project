@@ -1,24 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% if user_name %}
+    <h1>Hello, {{ user_name }} {{ user_surname }}
+    Our managers will contact you via your e-mail in no time! Thank you for your time. Have a nice day!</h1>
+    {% else %}
+    <h2>Insert user name, please</h2>
+    {% endif %}
    
         <!-- <form method="POST">
             <input type="text" name="user_name">
             <input type="Submit">
         </form> -->
 
+        {% for user in users %}
+            {{user.name}}
+            {{user.surname}}
+            <br>
+        {% endfor %}
+
+        {% for service in services %}
+            {{service_type}}
+            <br>
+        {% endfor %}
+
+        {% for payment in payments %}
+            {{payment_type}}
+            <br>
+        {% endfor %}
+        
         <form method="POST">
             {{ form.csrf_token }}
             {{ form.UserNameField }}
             {{ form.UserSurNameField }}
             {{ form.UserEmailField }}
-            <input type="Submit">
+            <input type="submit">
         </form>
-        {% if user_name %}
-        <h1>Hello, {{ user_name }} {{ user_surname }}
-    Our managers will contact you via your e-mail in no time! Thank you for your time. Have a nice day!</h1>
-       
-        {% else %}
-        <h2>Insert user name, please</h2>
-        {% endif %}
 {% endblock %}
