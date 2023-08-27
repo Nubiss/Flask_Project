@@ -13,6 +13,15 @@
             <input type="Submit">
         </form> -->
 
+        {% for role in roles%}
+        {{role.id}}
+        {{role.title}}
+        <form action="{url_for ('delete_role', delete_id = role.id)}" method = "POST">
+            <button>Delete</button>
+        </form>
+        <br>
+        {% endfor %}
+
         {% for user in users %}
             {{user.name}}
             {{user.surname}}

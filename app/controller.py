@@ -1,4 +1,4 @@
-from app import app, model
+from app import app, model, repository
 from flask import render_template, request
 from datetime import datetime
 from.forms import UserNameForm
@@ -7,7 +7,9 @@ from.forms import UserNameForm
 @app.route('/index')
 def index():
         form = UserNameForm()
-        return render_template ("index.html", form = form);
+        formDelete = UserNameForm()
+        roles = repository.getRoles()
+        return render_template ("index.html", form = form, roles = roles, formDelete = formDelete);
 
 @app.route('/info')
 def info ():
@@ -47,6 +49,24 @@ def index_post():
                 text1 = form.UserNameField.data
                 text2 = form.UserSurNameField.data
                 text3 = form.UserEmailField.data
-                return render_template ("index.html", form = form, user_name = text1, user_surname = text2, user_email = text3, users = users, services = services, payments = payments);
+                
+                
+                repository.saveRole(text)
+                roles = repository. getRoles()
+                text = text
+                return render_template ("index.html", form = form, user_name = text1, user_surname = text2, user_email = text3, users = users, services = services, payments = payments, roles = roles);
         else:
                 return "Bad form"
+        
+@app.route ('/delete_role', methods =['POST'])
+def delete_role():
+        delete_id = request.args.get('delete_id')
+        repository.deleteRole(delete_id)
+        form = UserNameForm()
+        roles = repository.getRoles()
+        return render_template ("index.html", form = form, roles = roles);
+
+@app.route ('/user')
+def userInfo():
+        return "User";
+# Почему при запуске VS Code пишет ошибку: "ModuleNotFoundError: No module named 'app'"?
