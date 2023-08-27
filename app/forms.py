@@ -8,3 +8,7 @@ class UserNameForm(FlaskForm):
     UserNameField = StringField('UserNameField', validators=[DataRequired()])
     UserSurNameField = StringField('UserSurNameField', validators=[DataRequired()])
     UserEmailField = StringField('UserEmailField', validators=[DataRequired()])
+    
+class CredentialsForm(FlaskForm):
+    loginField = StringField('loginField', validators=[DataRequired()])
+    passwordField= StringField('passwordField', validators=[DataRequired()])

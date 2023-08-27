@@ -1,7 +1,25 @@
 from app import app, model, repository
 from flask import render_template, request
 from datetime import datetime
-from.forms import UserNameForm
+from .forms import UserNameForm, CredentialsForm
+
+@app.route('/register', methods=['GET'])
+def register():
+        form = CredentialsForm()
+        return render_template ("register.html", form = form);
+        
+        
+@app.route('/register', methods=['POST'])
+def register_post():
+        form = CredentialsForm()
+        if form.validate_on_submit():
+                credentials = model.Credentials(login = form.loginField.data, password = form.passwordField.data)
+                if repository.checkLogin(credentials.login):
+                        repository.saveCredentials (credentials)
+                        return "Login acceptable"
+                else:
+                        return "Login exists"
+        return render_template ("register.html", form = form);
 
 @app.route ('/', methods=['GET'])
 @app.route('/index')

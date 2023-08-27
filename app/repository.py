@@ -27,3 +27,19 @@ def deleteRole(role):
     cursor = db_connection.cursor()
     cursor.execute ("delete from roles where r_id = %s", (role,))
     db_connection.commit()
+    
+def checkLogin(login):
+    db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
+    cursor = db_connection.cursor()
+    cursor.execute("SELECT * FROM credentials WHERE c_login = %S", (login,))
+    row = cursor.fetchone()
+    if row == None:
+        return True
+    else:
+        return False
+    
+def saveCredentials(credentials):
+    db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
+    cursor = db_connection.cursor()
+    cursor.execute ("INSERT INTO credentials (c_login, c_password) VALUES(%s, %s)", (credentials.login, credentials.password))
+    db_connection.commit()
