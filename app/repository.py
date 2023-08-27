@@ -41,5 +41,37 @@ def checkLogin(login):
 def saveCredentials(credentials):
     db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
     cursor = db_connection.cursor()
-    cursor.execute ("INSERT INTO credentials (c_login, c_password) VALUES(%s, %s)", (credentials.login, credentials.password))
+    cursor.execute("INSERT INTO users()  VALUES ();")
+    user_id = cursor.lastrowid
+    cursor.execute ("INSERT INTO credentials (c_login, c_password, u_id) VALUES(%s, %s, %s)", (credentials.login, credentials.password, user_id))
     db_connection.commit()
+    
+def login(login, password):
+    db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
+    cursor = db_connection.cursor()
+    cursor.execute("SELECT u_id from credentials WHERE c_login = %s and c_password = %s", (login,password))
+    data = cursor.fetchone()
+    if data != None:
+        user_id = data[0]
+        cursor.execute("SELECT * from users WHERE u_id = %s;", (user_id,))
+        user_data = cursor.fetchone()
+        if user_data !=None:
+            new_user = model.User(user_data[0], user_data[1], user_data[2], user_data[3])
+            return new_user
+        else:
+            return None
+    else:
+        return None
+    return None
+
+def load_user_by_id(user_id):
+    db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
+    cursor = db_connection.cursor()
+    cursor.execute("SELECT * from users WHERE u_id = %s", (user_id,))
+    user_data = cursor.fetchone()
+    if user_data !=None:
+        new_user = model.User(user_data[0], user_data[1], user_data[2], user_data[3])
+        return new_user
+    else:
+        return None
+        

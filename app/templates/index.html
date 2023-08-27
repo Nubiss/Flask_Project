@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+    {% if current_user.is authecticated %}
     {% if user_name %}
     <h1>Hello, {{ user_name }} {{ user_surname }}
     Our managers will contact you via your e-mail in no time! Thank you for your time. Have a nice day!</h1>

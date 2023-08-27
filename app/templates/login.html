@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+
     <form method = "POST">
         {{ form.csrf_token }}
         {{form.loginField }}
         {{form.passwordField }}
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
 </form>
 
 {% endblock %}

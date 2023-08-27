@@ -1,8 +1,26 @@
 from app import app, model, repository
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
+from flask_login import login_user, current_user, login_required, logout_user
 from datetime import datetime
 from .forms import UserNameForm, CredentialsForm
 
+@app.route('/login', methods=['GET'])
+def login():
+        form = CredentialsForm()
+        return render_template ("login.html", form = form);
+
+@app.route('/login', methods=['POST'])
+def login_post():
+        form = CredentialsForm()
+        if form.validate_on_submit():
+              user = repository.login(form.loginField.data, form.passwordField.data)
+              if user:
+                      login_user(user)      
+                      return redirect(url_for('index'))
+              else:
+                      return "bad pass"
+        return render_template("login.html", form=form)
+ 
 @app.route('/register', methods=['GET'])
 def register():
         form = CredentialsForm()
@@ -31,7 +49,10 @@ def index():
 
 @app.route('/info')
 def info ():
-        return render_template("info.html")
+        if current_user.is_authenticated:
+                return render_template("info.html")
+        else:
+                return redirect(url_for('login'))
 
 @app.route ('/', methods=['POST'])
 @app.route ('/index', methods =['POST'])
@@ -70,7 +91,7 @@ def index_post():
                 
                 
                 repository.saveRole(text)
-                roles = repository. getRoles()
+                roles = repository.getRoles()
                 text = text
                 return render_template ("index.html", form = form, user_name = text1, user_surname = text2, user_email = text3, users = users, services = services, payments = payments, roles = roles);
         else:
@@ -88,3 +109,12 @@ def delete_role():
 def userInfo():
         return "User";
 # Почему при запуске VS Code пишет ошибку: "ModuleNotFoundError: No module named 'app'"?
+
+
+@app.route('/logout')
+def logout():
+        if current_user. is_authenticated:
+                logout_user()
+                return redirect(url_for('login'))
+        else:
+                return redirect(url_for('login'))
