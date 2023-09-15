@@ -9,7 +9,7 @@
 </head>
 <body>
     <div>
-        {% if current user.is authenticated %}
+        {% if current_user.is_authenticated %}
         <a href="/index">Home</a>
         {% else %}
         <a herf ="/info">Info</a>

@@ -20,7 +20,7 @@ class Credentials():
     password = ""
     u_id = 0
     
-    def _init_(self, id = 0, login = "", password = "", u_id = 0):
+    def __init__(self, id = 0, login = "", password = "", u_id = 0):
         self.id = u_id
         self.login = login
         self.password = password

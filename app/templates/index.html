@@ -2,49 +2,31 @@
 
 {% block content %}
 
-    {% if current_user.is authecticated %}
-    {% if user_name %}
-    <h1>Hello, {{ user_name }} {{ user_surname }}
-    Our managers will contact you via your e-mail in no time! Thank you for your time. Have a nice day!</h1>
-    {% else %}
-    <h2>Insert user name, please</h2>
-    {% endif %}
-   
-        <!-- <form method="POST">
-            <input type="text" name="user_name">
-            <input type="Submit">
-        </form> -->
+	
+	{% if user_name %}
+	<h1>Hello: {{ user_name }}</h1>
+	{% else %}
+	<h1>Please enter user name:</h1>
+	{% endif %}	
+ 		{%  for role in roles%}
+ 			{{role.id}}
+ 			{{role.title}}
+ 			<form action="{{url_for('delete_role', delete_id = role.id)}}" method="POST">
+ 				<button >Delete</button>
+ 			</form>
+ 			<br>
+ 		{% endfor %}
 
-        {% for role in roles%}
-        {{role.id}}
-        {{role.title}}
-        <form action="{url_for ('delete_role', delete_id = role.id)}" method = "POST">
-            <button>Delete</button>
-        </form>
-        <br>
-        {% endfor %}
+ 		<!-- {% for user in users %}
+ 			{{user.name}}
+ 			{{user.surname}}
+ 			<br>
+ 		{% endfor %} -->
+		<form method="POST">
+			{{ form.csrf_token }}
+			{{ form.userNameField }}
+			<input type="submit">
+		</form>
 
-        {% for user in users %}
-            {{user.name}}
-            {{user.surname}}
-            <br>
-        {% endfor %}
-
-        {% for service in services %}
-            {{service_type}}
-            <br>
-        {% endfor %}
-
-        {% for payment in payments %}
-            {{payment_type}}
-            <br>
-        {% endfor %}
-        
-        <form method="POST">
-            {{ form.csrf_token }}
-            {{ form.UserNameField }}
-            {{ form.UserSurNameField }}
-            {{ form.UserEmailField }}
-            <input type="submit">
-        </form>
+		
 {% endblock %}
