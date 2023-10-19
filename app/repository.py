@@ -2,9 +2,9 @@ import mysql.connector as mysql
 from app import model
 
 HOST = "91.149.187.115"
-DATABASE = "test_shop"
-USER = "shopuser"
-PASSWORD = "1346792c212C_C"
+DATABASE = "Offers"
+USER = "S_P_"
+PASSWORD = "Qazwsx321!"
 PORT = "43251"
 
 def getRoles():
@@ -43,7 +43,9 @@ def saveCredentials(credentials):
     cursor = db_connection.cursor()
     cursor.execute("INSERT INTO users()  VALUES ();")
     user_id = cursor.lastrowid
-    cursor.execute("INSERT INTO credentials (c_login, c_password, u_id) VALUES(%s, %s, %s)", (credentials.login, credentials.password, user_id))
+    credentials.user_id = user_id
+    #cursor.execute("INSERT INTO credentials (c_login, c_password, u_id) VALUES(%s, %s, %s)", (credentials.login, credentials.password, user_id))
+    cursor.execute("INSERT INTO credentials (login, password, user_id) VALUES(%s, %s, %s)", (credentials.login, credentials.password, credentials.user_id))
     db_connection.commit()
     
 def login(login, password):

@@ -2,11 +2,13 @@
 
 {% block content %}
 
-    <form method = "POST">
+    {% comment %} <form method = "POST">
         {{ form.csrf_token }}
         {{form.loginField }}
         {{form.passwordField }}
         <button type="submit">Login</button>
-</form>
+</form> {% endcomment %}
+
+    <h1>Авторизация</h1>
 
 {% endblock %}

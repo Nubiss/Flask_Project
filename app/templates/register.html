@@ -3,12 +3,27 @@
 {% block content %}
 
 
-<form method="POST">
+{% comment %} <form method="POST">
 	{{ form.csrf_token }}
 
 	{{ form.loginField }}
 	{{ form.passwordField }}
 	<button type="submit">Register</button>
-</form>
+</form> {% endcomment %}
+
+	<h1>Регистрация</h1>
+	{% form "_formhelpers.html" import render field %}
+	<form action = "" method="POST" name="register">
+		{{ form.csrf_token }}
+		<p>
+			<dl>
+				Login: {{render_field(form.loginField)}}<br>
+				Password: {{render_field(form.passwordField)}}<br>
+				Confirm Password: {{render_field(form.passwordConfirmField)}}<br>
+			</dl>
+		</p>
+
+		<p><input type="submit" value= "Register"></p>
+	</form>
 
 {% endblock %}
