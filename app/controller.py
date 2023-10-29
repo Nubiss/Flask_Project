@@ -1,9 +1,9 @@
 from app import app, model, repository
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, login_required, logout_user
 from datetime import datetime
 from .forms import RegistrationForm
-import repository
+from .repository import *
 
 #from .forms import UserNameForm, CredentialsForm
 

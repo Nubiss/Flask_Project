@@ -48,6 +48,17 @@ def saveCredentials(credentials):
     cursor.execute("INSERT INTO credentials (login, password, user_id) VALUES(%s, %s, %s)", (credentials.login, credentials.password, credentials.user_id))
     db_connection.commit()
     
+def checkLogin(login):
+    db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
+    cursor = db_connection.cursor()
+    cursor.execute("SELECT login from credentials where login = %s", (login,))
+    row = cursor.fetchone()
+    if row == None:
+        return False
+    else:
+        return True
+        
+    
 def login(login, password):
     db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
     cursor = db_connection.cursor()
