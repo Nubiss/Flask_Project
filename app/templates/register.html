@@ -12,7 +12,7 @@
 </form> {% endcomment %}
 
 	<h1>Регистрация</h1>
-	{% form "_formhelpers.html" import render field %}
+	{% form "_formhelpers.html" import render_field %}
 	<form action = "" method="POST" name="register">
 		{{ form.csrf_token }}
 		<p>
@@ -22,7 +22,6 @@
 				Confirm Password: {{render_field(form.passwordConfirmField)}}<br>
 			</dl>
 		</p>
-
 		<p><input type="submit" value= "Register"></p>
 	</form>
 

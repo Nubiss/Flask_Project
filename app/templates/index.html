@@ -2,31 +2,6 @@
 
 {% block content %}
 
-	<h1>Добро пожаловать в магазин все для Котиков!</h1>
-	{% comment %} {% if user_name %}
-	<h1>Hello: {{ user_name }}</h1>
-	{% else %}
-	<h1>Please enter user name:</h1>
-	{% endif %}	 {% endcomment %}
- 		{% comment %} {%  for role in roles%}
- 			{{role.id}}
- 			{{role.title}}
- 			<form action="{{url_for('delete_role', delete_id = role.id)}}" method="POST">
- 				<button >Delete</button>
- 			</form>
- 			<br>
- 		{% endfor %} {% endcomment %}
-
- 		<!-- {% for user in users %}
- 			{{user.name}}
- 			{{user.surname}}
- 			<br>
- 		{% endfor %} -->
-		{% comment %} <form method="POST">
-			{{ form.csrf_token }}
-			{{ form.userNameField }}
-			<input type="submit">
-		</form> {% endcomment %}
-
-		
+	<h1> Мы рады приветствовать Вас на сайте нашей компании! </h1>
+	
 {% endblock %}

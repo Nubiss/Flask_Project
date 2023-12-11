@@ -8,14 +8,14 @@
     <title>Home</title>
 </head>
 <body>
-    {% comment %} <div>
+   <!-- <div>
         {% if current_user.is_authenticated %}
         <a href="/index">Home</a>
         {% else %}
         <a herf ="/info">Info</a>
         {% endif %}
-    </div> {% endcomment %}
-    
+    </div>-->
+   
     <div>
 
         <a herf ="/info">Info</a>
@@ -28,8 +28,8 @@
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul>
-                {% for message in messages%}
-                    <li>{{ message}}</li>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
                 {% endfor %}
                 </ul>
             {% endif %}

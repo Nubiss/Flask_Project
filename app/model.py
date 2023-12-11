@@ -43,9 +43,9 @@ from flask_login import UserMixin
 #         return self.id
         
 class Credentials():
-        def _init_(self, cred_id, login, password, user_id):
-            self.id = cred_id
-            self.login = login
-            self.password = password
-            self.user_id = user_id
+    def _init_(self, cred_id, login, password, user_id):
+        self.id = cred_id
+        self.login = login
+        self.password = password
+        self.user_id = user_id
             

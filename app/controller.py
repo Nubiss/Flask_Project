@@ -2,7 +2,7 @@ from app import app, model, repository
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, current_user, login_required, logout_user
 from datetime import datetime
-from .forms import RegistrationForm
+from .forms import RegistrationForm, UserNabeForm, CredentialsForm
 from .repository import *
 
 #from .forms import UserNameForm, CredentialsForm
@@ -42,23 +42,20 @@ from .repository import *
                         #return "Login exists"
         #return render_template ("register.html", form = form);
 
-@app.route ('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 @app.route('/index')
 def index():
-        # form = UserNameForm()
-        # formDelete = UserNameForm()
-        # roles = repository.getRoles()
-        #return render_template ("index.html", form = form, roles = roles, formDelete = formDelete);
         return render_template ("index.html");
+#         return render_template ("index.html");
 
 @app.route('/login', methods=['GET'])
 def login():
-        return render_template ("login.html");
+        return render_template("login.html")
 
 @app.route('/register', methods=['GET'])
 def register():
         form = RegistrationForm()
-        return render_template ("register.html", form = form);
+        return render_template("register.html", form = form)
 
 @app.route('/register', methods=['POST'])
 def register_post():
@@ -67,7 +64,7 @@ def register_post():
                 credentials = model.Credentials(0, form.loginField.data, form.passwordField.data, 0)
                 repository.saveCredentials(credentials)
                 return redirect (url_for('login'))
-        return render_template ("register.html", form = form);
+        return render_template ("register.html", form = form)
         
 
 #@app.route('/info')

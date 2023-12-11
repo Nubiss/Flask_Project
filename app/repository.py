@@ -1,11 +1,11 @@
 import mysql.connector as mysql
 from app import model
 
-HOST = "91.149.187.115"
-DATABASE = "Offers"
-USER = "S_P_"
+HOST = "127.0.0.1"
+DATABASE = "mydb"
+USER = "root"
 PASSWORD = "Qazwsx321!"
-PORT = "43251"
+PORT = "5500"
 
 def getRoles():
 	db_connection = mysql.connect( host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
@@ -41,7 +41,7 @@ def checkLogin(login):
 def saveCredentials(credentials):
     db_connection = mysql.connect(host = HOST, database = DATABASE, user = USER, password = PASSWORD, port = PORT, auth_plugin='mysql_native_password')
     cursor = db_connection.cursor()
-    cursor.execute("INSERT INTO users()  VALUES ();")
+    cursor.execute("INSERT INTO users() VALUES ();")
     user_id = cursor.lastrowid
     credentials.user_id = user_id
     #cursor.execute("INSERT INTO credentials (c_login, c_password, u_id) VALUES(%s, %s, %s)", (credentials.login, credentials.password, user_id))
